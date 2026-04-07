@@ -1,15 +1,22 @@
-# PID Control Simulation in MATLAB
+# PID Temperature Control for Simulation
 
-This repository contains MATLAB simulations demonstrating **PID (Proportional-Integral-Derivative) control** applied to a simple thermal system. The project explores how different PID tunings affect system behavior and compares controlled vs uncontrolled scenarios.
+## Project Overview
+This project demonstrates the design and simulation of a PID controlller to regulate tempearture in a dynamic thermal system.
+The system models a heater that raises temperature over time while losing heat to  the environment. A PID controller is implemented to ensure the temperature reaches and maintains a desired setpoint efficiently.
 
 ---
 
-## Project Overview
 
-- **Goal:** Simulate a temperature control system and visualize how PID parameters influence system response.
-- **System Model:** First-order thermal system:
+## Objectives
+- Model a first-order thermal system
+- Implement PID control
+- Compare uncontrolled vs controlled behaviour
+- Analyze the effect of PID parameeter tuning
+  
+## System Model: 
+**First-order thermal system:**
 
-`{dT}/{dt} = -a(T - T_env}) + b . u`
+`{dT}/{dt} = -a(T - T_env) + b . u`
 
 Where:
   - T = system temperature
@@ -17,7 +24,8 @@ Where:
   - u = control input (heater)
   - a, b = system constants
 
-- **PID Control:** Adjusts `u` to maintain a target temperature (`setpoint`) using:
+## PID Control:
+**Adjusts `u` to maintain a target temperature (`setpoint`) using:** 
 
 `u = K_p *e + K_i{int(e) dt} + K_d({de}/{dt})`
 
@@ -29,17 +37,9 @@ Where e = T_setpoint - T
 
 | Script | Description |
 |--------|-------------|
-| `Good_Tuning.m` | Demonstrates well-tuned PID response. |
-| `Good_vs_Bad_Tuning.m` | Compares well-tuned vs poorly-tuned PID controllers. |
-| `No_Control_vs_PID.m` | Compares system response without control vs PID control. |
-
----
-
-## Features
-
-- Clamp control signals (`u`) to realistic limits.  
-- Visualize system response over time with MATLAB plots.  
-- Explore effects of **bad PID tuning**: overshoot, oscillations, and slow settling.  
+| `Good_tuning.m` | Demonstrates well-tuned PID response. |
+| `GoodTuningvsBadTuning.m` | Compares well-tuned vs poorly-tuned PID controllers. |
+| `PIDvsNoControl.m` | Compares system response without control vs PID control. |
 
 ---
 
@@ -51,8 +51,19 @@ Where e = T_setpoint - T
 
 ---
 
-## Insights
+## Results and Insights
+### Plots
+1. Well tuned PID response
+![Well Tuned PID](good_tuning.png)
 
+2. No Control vs PID
+![No Control vs PID](PIDvsNoControl.png)
+
+3. Good tuning vs Bad tuning
+![Good tuning vs Bad tuning](good_vs_bad_tuning.png)
+
+
+### Tuning Observations
 - **High `Kp`** → Fast response but may overshoot.  
 - **High `Ki`** → Eliminates steady-state error but may cause oscillations.  
 - **Low `Kd`** → Underdamped, oscillatory response.  
@@ -60,11 +71,18 @@ Where e = T_setpoint - T
 
 ---
 
+## Key Learnings
+- PID controllers reply heavily on proper tuning
+- Each gain parameter affects system behavior differently
+- Simulation is essential before real-worldd implementation
+
+
 ## Optional Enhancements
 
 - Add more visualizations for control signal `u` over time.  
 - Introduce noise to simulate a real-world thermal system.  
 - Create functions to reuse PID logic across different scripts.
+- Use optimization methods for automatic tuning
 
 ---
 
